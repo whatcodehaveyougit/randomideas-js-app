@@ -10,11 +10,12 @@ class IdeaForm {
 
   handleSubmit(e) {
     e.preventDefault();
-    // const username = document.querySelector('#username').value;
-    // const text = document.querySelector('#idea-text').value;
-    // const tag = document.querySelector('#tag').value;
-    // console.log(username, text, tag);
-    // this._form.reset();
+    const username = document.querySelector('#username').value;
+    const text = document.querySelector('#idea-text').value;
+    const tag = document.querySelector('#tag').value;
+    console.log(username, text, tag);
+    this._form.reset();
+    document.dispatchEvent(new Event('closemodal'))
     console.log('submit')
   }
 
