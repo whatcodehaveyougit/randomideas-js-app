@@ -1,5 +1,4 @@
 import IdeasApi from "../services/ideasApi";
-
 class IdeaList {
 
   constructor() {
@@ -14,18 +13,15 @@ class IdeaList {
     this._validTags = new Set(['business', 'design', 'development', 'marketing']);
   }
 
-
-  // t ReferenceError: regeneratorRuntime is not defined
+  // ReferenceError: regeneratorRuntime is not defined
   // Causing this error because we are using async await syntax
 
   async getIdeas() {
     try {
-      console.log(IdeasApi)
       const res = await IdeasApi.getIdeas();
       console.log(res)
-      this._ideas = res.data.data;
+      this._ideas = res.data.ideas;
       this.render()
-      console.log(this._ideas)
     } catch (error) {
       console.log(error)
     }
@@ -39,9 +35,7 @@ class IdeaList {
     } else {
       tagClass = '';
     }
-
     return tagClass
-
   }
 
   render() {

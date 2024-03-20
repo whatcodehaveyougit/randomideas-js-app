@@ -7,6 +7,10 @@ class IdeasApi {
   async getIdeas() {
     return axios.get(this._apiUrl);
   }
+
+  async createIdea(data){
+    return axios.post(this._apiUrl, data);
+  }
 }
 
 // Very cool just initialsing is here!

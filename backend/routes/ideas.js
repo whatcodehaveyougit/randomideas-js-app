@@ -6,7 +6,7 @@ const Idea = require('../models/Idea');
 router.get('/', async (req, res) => {
   try {
     const ideas = await Idea.find(); // our model has a .find() method
-    res.json({ success: true, data: ideas });
+    res.json({ success: true, ideas: ideas });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

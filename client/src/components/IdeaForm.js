@@ -1,3 +1,5 @@
+import IdeasApi from "../services/ideasApi";
+
 class IdeaForm {
   constructor() {
     this._formModal = document.querySelector('#modal');
@@ -7,15 +9,15 @@ class IdeaForm {
     this._form.addEventListener('submit', this.handleSubmit.bind(this))
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     const username = document.querySelector('#username').value;
     const text = document.querySelector('#idea-text').value;
     const tag = document.querySelector('#tag').value;
-    console.log(username, text, tag);
     this._form.reset();
-    document.dispatchEvent(new Event('closemodal'))
-    console.log('submit')
+    document.dispatchEvent(new Event('closemodal'));
+    await IdeasApi.createIdea({ username, text, tag });
+    document.dispatchEvent(new Event('updateideas'));
   }
 
   render(){
