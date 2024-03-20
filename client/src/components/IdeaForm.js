@@ -1,7 +1,6 @@
 class IdeaForm {
   constructor() {
     this._formModal = document.querySelector('#modal');
-
   }
 
   addEventListeners() {
