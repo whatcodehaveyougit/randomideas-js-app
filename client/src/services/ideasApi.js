@@ -11,6 +11,21 @@ class IdeasApi {
   async createIdea(data){
     return axios.post(this._apiUrl, data);
   }
+
+  async updateIdea(data){
+    return axios.put(`${this._apiUrl}/${data.id}`, data);
+  }
+
+  deleteIdea(id){
+    const username = localStorage.getItem('username') ? localStorage.getItem('username') : ''
+    console.log(username + 'sending it here')
+
+    return axios.delete(`${this._apiUrl}/${id}`, {
+      data: {
+        username
+      }
+    });
+  }
 }
 
 // Very cool just initialsing is here!

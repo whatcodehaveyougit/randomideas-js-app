@@ -3,15 +3,31 @@ class IdeaList {
 
   constructor() {
     this._ideaList = document.querySelector('#idea-list');
-    this._ideas = [{
-      id: 1,
-      text: 'helo',
-      tag: 'business',
-      date: new Date(),
-    }];
+    this._ideas = [];
     this.getIdeas();
     this._validTags = new Set(['business', 'design', 'development', 'marketing']);
-    document.addEventListener('closemodal', this.getIdeas.bind(this))
+    document.addEventListener('closemodal', this.getIdeas.bind(this));
+    this.addEventListeners()
+  }
+
+  addEventListeners(){
+    this._ideaList.addEventListener('click', (e) => {
+      if (e.target.classList.contains('fa-times')) {
+        e.stopImmediatePropagation()
+        this.deleteIdea(e)
+      }
+    })
+  }
+
+  async deleteIdea(e){
+    const elementIdToBeDeleted = e.target.parentElement.parentElement.dataset.id;
+    try {
+      const res = await IdeasApi.deleteIdea(elementIdToBeDeleted)
+      this._ideas = this._ideas.filter(idea => idea._id !== elementIdToBeDeleted)
+      this.getIdeas();
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   // ReferenceError: regeneratorRuntime is not defined
@@ -47,7 +63,7 @@ class IdeaList {
     console.log(this._ideaList)
     this._ideaList.innerHTML = this._ideas.map(idea => {
       const tagClass = this.getTagColor(idea.tag);
-      return `<div class="card">
+      return `<div class="card" data-id="${idea._id}">
       <button class="delete"><i class="fas fa-times"></i></button>
       <h3>
         ${idea.text}
