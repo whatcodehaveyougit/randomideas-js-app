@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
     tag,
     username,
   });
-
+  console.log(idea)
   try {
     const newIdea = await idea.save();
     res.json({ success: true, newIdea: newIdea });
@@ -50,12 +50,16 @@ router.put('/:id', async (req, res) => {
     if (!idea) {
       return res.status(404).json({ success: false, message: `No idea with the id of ${req.params.id}` });
     }
-    const { text, tag, username } = req.body;
-    idea.text = text || idea.text;
-    idea.tag = tag || idea.tag;
-    idea.username = username || idea.username;
-    const updatedIdea = await idea.save();
-    res.json({ success: true, data: updatedIdea });
+    if(idea.username === req.body.username) {
+      const { text, tag, username } = req.body;
+      idea.text = text || idea.text;
+      idea.tag = tag || idea.tag;
+      idea.username = username || idea.username;
+      const updatedIdea = await idea.save();
+      return res.json({ success: true, data: updatedIdea });
+    }
+    res.status(403).json({ success: false, message: `You are not authorized to update this item` });
+
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -64,11 +68,19 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const idea = await Idea.findById(req.params.id);
+    // Math the usernames
+    console.log(idea)
+    console.log(idea.username)
+    console.log(req.body)
+    if(idea.username == req.body.username) {
+      await idea.deleteOne();
+      return res.json({ success: true, message: `Idea with id ${idea.id} deleted` });
+    }
     if (!idea) {
       return res.status(404).json({ success: false, message: `No idea with the id of ${req.params.id}` });
     }
-    await idea.deleteOne();
-    res.json({ success: true, data: {} });
+    res.status(403).json({ success: false, message: `You are not authorized to delete this item` });
+
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

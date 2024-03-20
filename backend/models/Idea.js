@@ -9,11 +9,11 @@ const IdeaSchema = new mongoose.Schema({
   },
   tag: {
     type: String,
-    required: true
+    required: [true, 'Please add some text']
   },
   username: {
     type: String,
-    default: Date.now
+    required: [true, 'Please add some text']
   },
   date: {
     type: Date,

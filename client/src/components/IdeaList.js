@@ -18,10 +18,8 @@ class IdeaList {
   // Causing this error because we are using async await syntax
 
   async getIdeas() {
-    console.log('getting ideas')
     try {
       const res = await IdeasApi.getIdeas();
-      console.log(res)
       this._ideas = res.data.ideas;
       this.render()
     } catch (error) {
@@ -57,7 +55,7 @@ class IdeaList {
       <p class="tag  ${tagClass}">${idea.tag}</p>
       <p>
         Posted on <span class="date">${idea.date}</span> by
-        <span class="author">${idea.tag}</span>
+        <span class="author">${idea.username}</span>
       </p>
     </div>`
     }).join('');
