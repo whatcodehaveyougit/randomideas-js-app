@@ -12,4 +12,5 @@ class IdeasApi {
   }
 }
 
-export default IdeasApi;
+// Very cool just initialsing is here!
+export default new IdeasApi();

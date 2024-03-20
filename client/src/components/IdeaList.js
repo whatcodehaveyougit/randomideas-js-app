@@ -1,6 +1,7 @@
 import IdeasApi from "../services/ideasApi";
 
 class IdeaList {
+
   constructor() {
     this._ideaList = document.querySelector('#idea-list');
     this._ideas = [{
