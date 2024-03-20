@@ -63,8 +63,9 @@ class IdeaList {
     console.log(this._ideaList)
     this._ideaList.innerHTML = this._ideas.map(idea => {
       const tagClass = this.getTagColor(idea.tag);
+      const isUserLoggedIn = localStorage.getItem('username') === idea.username;
       return `<div class="card" data-id="${idea._id}">
-      <button class="delete"><i class="fas fa-times"></i></button>
+      ${ isUserLoggedIn && '<button class="delete"><i class="fas fa-times"></i></button>'}
       <h3>
         ${idea.text}
       </h3>
