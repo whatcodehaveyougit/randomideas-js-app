@@ -11,12 +11,14 @@ class IdeaList {
     }];
     this.getIdeas();
     this._validTags = new Set(['business', 'design', 'development', 'marketing']);
+    document.addEventListener('closemodal', this.getIdeas.bind(this))
   }
 
   // ReferenceError: regeneratorRuntime is not defined
   // Causing this error because we are using async await syntax
 
   async getIdeas() {
+    console.log('getting ideas')
     try {
       const res = await IdeasApi.getIdeas();
       console.log(res)
@@ -25,6 +27,11 @@ class IdeaList {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  addIdeaToList(idea) {
+    this._ideas.push(idea);
+    this.render()
   }
 
   getTagColor(tag) {
@@ -39,6 +46,7 @@ class IdeaList {
   }
 
   render() {
+    console.log(this._ideaList)
     this._ideaList.innerHTML = this._ideas.map(idea => {
       const tagClass = this.getTagColor(idea.tag);
       return `<div class="card">
