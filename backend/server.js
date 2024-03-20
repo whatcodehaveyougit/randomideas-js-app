@@ -10,7 +10,7 @@ const connectDB = require('./config/db');
 connectDB();
 
 // This will make the public folder accessible to the browser / static
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // We want the public folder to be the dist folder,
 // So when we run npm run build is will build all the assets and bang them in the public folder
