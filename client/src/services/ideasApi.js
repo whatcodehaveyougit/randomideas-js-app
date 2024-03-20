@@ -5,8 +5,7 @@ class IdeasApi {
   }
 
   async getIdeas() {
-    return axios.get(this._apiUrl)
-      .then(res => res.json())
+    return axios.get(this._apiUrl);
   }
 }
 
