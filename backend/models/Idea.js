@@ -17,7 +17,7 @@ const IdeaSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now().split('T')[0]
+    default: Date.now.slice(0, 8)
   }
 });
 
