@@ -12,20 +12,16 @@ class Modal {
   }
 
   open() {
-    console.log('ope')
     this._modal.style.display = 'block'
   }
 
   close() {
-    console.log('closing')
     this._modal.style.display = 'none'
   }
 
   outsideClick(e) {
-    console.log(e)
     if (e.target === this._modal) { // if the target is the modal
       // The target is the event that triggered the event
-      console.log('click outside')
       this.close()
     }
   }
