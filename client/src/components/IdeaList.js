@@ -60,18 +60,22 @@ class IdeaList {
   }
 
   render() {
-    console.log(this._ideaList)
     this._ideaList.innerHTML = this._ideas.map(idea => {
       const tagClass = this.getTagColor(idea.tag);
       const isUserLoggedIn = localStorage.getItem('username') === idea.username;
+
+      const date = new Date(idea.date);
+      const options = { year: 'numeric', month: 'short', day: '2-digit' };
+      const formattedDate = date.toLocaleDateString('en-GB', options);
+
       return `<div class="card" data-id="${idea._id}">
-      ${ isUserLoggedIn && '<button class="delete"><i class="fas fa-times"></i></button>'}
+      ${ isUserLoggedIn ? '<button class="delete"><i class="fas fa-times"></i></button>' : ''}
       <h3>
         ${idea.text}
       </h3>
       <p class="tag  ${tagClass}">${idea.tag}</p>
       <p>
-        Posted on <span class="date">${idea.date}</span> by
+        Posted on <span class="date">${formattedDate}</span> by
         <span class="author">${idea.username}</span>
       </p>
     </div>`
