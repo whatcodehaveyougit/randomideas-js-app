@@ -32,5 +32,5 @@ const ideaRouter = require('./routes/ideas');
 app.use('/api/ideas', ideaRouter);
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running mate!`);
 });

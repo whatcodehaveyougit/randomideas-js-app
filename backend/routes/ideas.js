@@ -67,11 +67,6 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const idea = await Idea.findById(req.params.id);
-    // Math the usernames
-    console.log(idea)
-    // console.log(idea.username)
-    console.log(req.body)
-    // console.log(res)
     if(idea.username == req.body.username) {
       await idea.deleteOne();
       return res.json({ success: true, message: `Idea with id ${idea.id} deleted` });

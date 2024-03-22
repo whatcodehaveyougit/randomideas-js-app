@@ -18,7 +18,6 @@ class IdeasApi {
 
   deleteIdea(id){
     const username = localStorage.getItem('username') ? localStorage.getItem('username') : ''
-    console.log(username + 'sending it here')
 
     return axios.delete(`${this._apiUrl}/${id}`, {
       data: {
